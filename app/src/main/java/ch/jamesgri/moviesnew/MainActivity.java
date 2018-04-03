@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ch.jamesgri.moviespart1.data.remote.ApiUtils;
-import ch.jamesgri.moviespart1.data.remote.MovieService;
+import ch.jamesgri.moviesnew.data.remote.ApiUtils;
+import ch.jamesgri.moviesnew.data.remote.MovieService;
 
 public class MainActivity extends AppCompatActivity {
 

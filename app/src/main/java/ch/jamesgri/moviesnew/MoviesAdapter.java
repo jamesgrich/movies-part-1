@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.jamesgri.moviespart1.data.model.Result;
+import ch.jamesgri.moviesnew.data.model.Result;
 
 /**
  * Created by jamesrichardson on 21/03/2018.
