@@ -42,13 +42,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         @Override
         public void onClick(View view) {
             ClipData.Item item = getItem(getAdapterPosition());
-            this.mItemListener.onPostClick(item.getAnswerId());
+            this.mItemListener.onPostClick(item.getMovieId());
 
             notifyDataSetChanged();
         }
     }
 
-    public AnswersAdapter(Context context, List<ClipData.Item> posts, PostItemListener itemListener) {
+    public MoviesAdapter(Context context, List<ClipData.Item> posts, PostItemListener itemListener) {
         mItems = posts;
         mContext = context;
         mItemListener = itemListener;
@@ -77,7 +77,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void updateAnswers(List<ClipData.Item> items) {
+    public void updateMovies(List<ClipData.Item> items) {
         mItems = items;
         notifyDataSetChanged();
     }
