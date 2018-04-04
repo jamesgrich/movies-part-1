@@ -27,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mService = ApiUtils.getMovieService();
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mAdapter = new MoviesAdapter(this, new ArrayList<ClipData.Item>(0), new MoviesAdapter().PostItemListener() {
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mAdapter = new MoviesAdapter(this, new ArrayList<ClipData.Item>(0), new MoviesAdapter.PostItemListener() {
 
             @Override
             public void onPostClick(long id) {
                 Toast.makeText(MainActivity.this, "Post id is" + id, Toast.LENGTH_SHORT).show();
             }
-        }));
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -44,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(itemDecoration);
 
         loadMovies();
+    }
+
+}
+
+    private void loadMovies() {
     }
 }
 

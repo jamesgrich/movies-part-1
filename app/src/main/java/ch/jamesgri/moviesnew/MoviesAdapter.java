@@ -33,8 +33,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         public ViewHolder(View itemView, ImageView movieImage, PostItemListener postItemListener) {
             super(itemView);
-            movieImage = itemView.findViewById(android.R.id.movies_artwork);
-
+            movieImage = itemView.findViewById(R.id.movies_artwork);
             this.mItemListener = postItemListener;
             itemView.setOnClickListener(this);
         }
@@ -42,7 +41,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         @Override
         public void onClick(View view) {
             ClipData.Item item = getItem(getAdapterPosition());
-            this.mItemListener.onPostClick(item.getMovieId());
+            this.mItemListener.onPostClick(item.R.id.getId());
 
             notifyDataSetChanged();
         }
@@ -89,4 +88,4 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     public interface PostItemListener {
         void onPostClick(long id);
     }
-
+}
