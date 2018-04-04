@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">MoviesNEW</string>
+    <string name="app_name">Movies Part 1</string>
     <string name="error_message">Cannot retrieve data</string>
 </resources>
