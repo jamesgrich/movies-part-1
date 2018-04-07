@@ -12,11 +12,8 @@ android {
             Properties properties = new Properties()
             properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
             def API_KEY = properties.getProperty('API_KEY')
-
-            defaultConfig {
-                buildConfigField 'String', 'API_KEY', API_KEY
+        buildConfigField 'String', 'API_KEY', API_KEY
         }
-    }
     buildTypes {
         release {
             minifyEnabled false
