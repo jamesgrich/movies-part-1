@@ -9,6 +9,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        android {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+            def API_KEY = properties.getProperty('API_KEY')
+
+            defaultConfig {
+                buildConfigField 'String', 'API_KEY', API_KEY
+            }
+        }
     }
     buildTypes {
         release {

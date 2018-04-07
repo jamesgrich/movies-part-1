@@ -7,14 +7,19 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ch.jamesgri.moviesnew.data.model.Result;
 import ch.jamesgri.moviesnew.data.remote.ApiUtils;
 import ch.jamesgri.moviesnew.data.remote.MovieService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,12 +41,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(itemDecoration);
+
+        getMovies();
+    }
+
+    public void getMovies() {
+
+        mService.getMovies().enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                if(response.isSuccessful()) {
+                    mAdapter.updateMovies(response.body().getGenreIds());
+                    Log.d("MainActivity", "posts loaded from API");
+                }else {
+                    int statusCode  = response.code();
+                    // handle request errors depending on status code
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+
+            }
+
+            @Override
+            public void onResponse();
+        }
     }
 }
 
