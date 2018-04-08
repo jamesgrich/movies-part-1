@@ -1,21 +1,17 @@
 package ch.jamesgri.moviesnew;
 
-import android.content.ClipData;
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ch.jamesgri.moviesnew.data.model.Movies;
+import ch.jamesgri.moviesnew.data.model.MoviesResponse;
 import ch.jamesgri.moviesnew.data.model.Result;
 import ch.jamesgri.moviesnew.data.remote.ApiUtils;
 import ch.jamesgri.moviesnew.data.remote.MovieService;
@@ -35,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mService = ApiUtils.getMovieService();
         mRecyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new MoviesAdapter(this, new ArrayList<ClipData.Item>(0), new MoviesAdapter.PostItemListener() {
+        mAdapter = new MoviesAdapter(this, new ArrayList<MoviesResponse>(0), new MoviesAdapter.PostItemListener() {
 
             @Override
             public void onPostClick(long id) {
@@ -54,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void getMovies() {
 
-        mService.getMovies().enqueue(new Callback<Movies>() {
+        mService.getMovies().enqueue(new Callback<MoviesResponse>() {
             @Override
-            public void onResponse(Call<Movies> call, Response<Movies> response) {
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if(response.isSuccessful()) {
                     mAdapter.updateMovies(response.body().getResults());
                     Log.d("MainActivity", "posts loaded from API");
@@ -67,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Result> call, Throwable t) {
+            public void onFailure(Call<Movies> call, Throwable t) {
 
             }
 

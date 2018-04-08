@@ -1,21 +1,16 @@
 package ch.jamesgri.moviesnew;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import ch.jamesgri.moviesnew.data.model.MoviesResponse;
 import ch.jamesgri.moviesnew.data.model.Movies;
-import ch.jamesgri.moviesnew.data.model.Result;
 
 /**
  * Created by jamesrichardson on 21/03/2018.
@@ -23,7 +18,7 @@ import ch.jamesgri.moviesnew.data.model.Result;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
-    private List<Movies> mItems;
+    private List<MoviesResponse> mItems;
     private Context mContext;
     private PostItemListener mItemListener;
 
@@ -45,7 +40,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         }
     }
 
-    public MoviesAdapter(Context context, List<Movies> posts, PostItemListener itemListener) {
+    public MoviesAdapter(Context context, List<MoviesResponse> posts, PostItemListener itemListener) {
         mItems = posts;
         mContext = context;
         mItemListener = itemListener;
@@ -65,7 +60,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Movies item = mItems.get(position);
+        MoviesResponse item = mItems.get(position);
         ImageView moviesImage = holder.titleTv;
     }
 
@@ -74,12 +69,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void updateMovies(List<Movies> items) {
+    public void updateMovies(List<MoviesResponse> items) {
         mItems = items;
         notifyDataSetChanged();
     }
 
-    private Movies getItem(int adapterPosition) {
+    private MoviesResponse getItem(int adapterPosition) {
         return mItems.get(adapterPosition);
     }
 
