@@ -19,4 +19,5 @@ public interface MovieService {
 
     @GET("movie/{sort_by}")
     Call<Movies> getMovies(@Path("sort_by") String sortBy, @Query("api_key") String apiKey);
+
 }
