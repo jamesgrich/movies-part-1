@@ -1,6 +1,7 @@
 package ch.jamesgri.moviesnew;
 
 import android.content.ClipData;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ch.jamesgri.moviesnew.data.model.Movies;
 import ch.jamesgri.moviesnew.data.model.Result;
 import ch.jamesgri.moviesnew.data.remote.ApiUtils;
 import ch.jamesgri.moviesnew.data.remote.MovieService;
@@ -52,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void getMovies() {
 
-        mService.getMovies().enqueue(new Callback<Result>() {
+        mService.getMovies().enqueue(new Callback<Movies>() {
             @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
+            public void onResponse(Call<Movies> call, Response<Movies> response) {
                 if(response.isSuccessful()) {
-                    mAdapter.updateMovies(response.body().getGenreIds());
+                    mAdapter.updateMovies(response.body().getResults());
                     Log.d("MainActivity", "posts loaded from API");
                 }else {
                     int statusCode  = response.code();
