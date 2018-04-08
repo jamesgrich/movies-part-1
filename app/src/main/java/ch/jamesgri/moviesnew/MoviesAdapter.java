@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.jamesgri.moviesnew.data.model.Movies;
 import ch.jamesgri.moviesnew.data.model.Result;
 
 /**
@@ -22,7 +23,7 @@ import ch.jamesgri.moviesnew.data.model.Result;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
-    private List<ClipData.Item> mItems;
+    private List<Movies> mItems;
     private Context mContext;
     private PostItemListener mItemListener;
 
@@ -38,12 +39,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         @Override
         public void onClick(View view) {
+
             int clickedPosition = getAdapterPosition();
             mItemListener.onPostClick(clickedPosition);
         }
     }
 
-    public MoviesAdapter(Context context, List<ClipData.Item> posts, PostItemListener itemListener) {
+    public MoviesAdapter(Context context, List<Movies> posts, PostItemListener itemListener) {
         mItems = posts;
         mContext = context;
         mItemListener = itemListener;
@@ -63,7 +65,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ClipData.Item item = mItems.get(position);
+        Movies item = mItems.get(position);
         ImageView moviesImage = holder.titleTv;
     }
 
@@ -72,12 +74,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void updateMovies(List<ClipData.Item> items) {
+    public void updateMovies(List<Movies> items) {
         mItems = items;
         notifyDataSetChanged();
     }
 
-    private ClipData.Item getItem(int adapterPosition) {
+    private Movies getItem(int adapterPosition) {
         return mItems.get(adapterPosition);
     }
 
