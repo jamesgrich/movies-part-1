@@ -18,7 +18,7 @@ import ch.jamesgri.moviesnew.data.model.Movies;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
-    private List<MoviesResponse> mItems;
+    private List<Movies> mItems;
     private Context mContext;
     private PostItemListener mItemListener;
 
@@ -40,7 +40,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         }
     }
 
-    public MoviesAdapter(Context context, List<MoviesResponse> posts, PostItemListener itemListener) {
+    public MoviesAdapter(Context context, List<Movies> posts, PostItemListener itemListener) {
         mItems = posts;
         mContext = context;
         mItemListener = itemListener;
@@ -60,7 +60,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        MoviesResponse item = mItems.get(position);
+        Movies item = mItems.get(position);
         ImageView moviesImage = holder.titleTv;
     }
 
@@ -69,12 +69,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void updateMovies(List<MoviesResponse> items) {
+    public void updateMovies(List<Movies> items) {
         mItems = items;
         notifyDataSetChanged();
     }
 
-    private MoviesResponse getItem(int adapterPosition) {
+    private Movies getItem(int adapterPosition) {
         return mItems.get(adapterPosition);
     }
 

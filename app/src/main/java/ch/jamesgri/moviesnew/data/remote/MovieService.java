@@ -6,7 +6,7 @@ package ch.jamesgri.moviesnew.data.remote;
 
 import java.util.List;
 
-import ch.jamesgri.moviesnew.data.model.Result;
+import ch.jamesgri.moviesnew.data.model.Movies;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -18,5 +18,5 @@ public interface MovieService {
     // Calling the GET request for the two API end points
 
     @GET("movie/{sort_by}")
-    Call<Result> getMovies(@Path("sort_by") String sortBy, @Query("api_key") String apiKey);
+    Call<Movies> getMovies(@Path("sort_by") String sortBy, @Query("api_key") String apiKey);
 }

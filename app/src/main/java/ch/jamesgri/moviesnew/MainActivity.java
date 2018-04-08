@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mService = ApiUtils.getMovieService();
         mRecyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new MoviesAdapter(this, new ArrayList<MoviesResponse>(0), new MoviesAdapter.PostItemListener() {
+        mAdapter = new MoviesAdapter(this, new ArrayList<Movies>(0), new MoviesAdapter.PostItemListener() {
 
             @Override
             public void onPostClick(long id) {
@@ -63,12 +63,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Movies> call, Throwable t) {
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
 
             }
 
-            @Override
-            public void onResponse();
         }
     }
 }
