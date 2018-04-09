@@ -1,7 +1,5 @@
 package ch.jamesgri.moviesnew.data.remote;
 
-import ch.jamesgri.moviesnew.BuildConfig;
-
 /**
  * Created by jamesrichardson on 02/04/2018.
  */

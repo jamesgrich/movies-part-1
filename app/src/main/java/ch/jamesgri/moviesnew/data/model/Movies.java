@@ -55,7 +55,6 @@ public class Movies {
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
-
     // Constructor
 
     public Movies(Integer voteCount, Integer id, Boolean video, Double voteAverage, String title, Double popularity, String posterPath, String originalLanguage, String originalTitle, List<Integer> genreIds, String backdropPath, Boolean adult, String overview, String releaseDate) {
