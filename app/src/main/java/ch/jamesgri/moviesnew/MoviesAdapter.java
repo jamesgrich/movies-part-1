@@ -13,6 +13,8 @@ import java.util.List;
 
 import ch.jamesgri.moviesnew.data.model.Movies;
 
+import static ch.jamesgri.moviesnew.data.remote.ApiUtils.BASE_URL;
+
 /**
  * Created by jamesrichardson on 21/03/2018.
  */
@@ -64,7 +66,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         Movies item = mItems.get(position);
 
         Picasso.with(mContext)
-                .load(item.getPosterPath())
+                .load(BASE_URL + item.getPosterPath())
                 .into(holder.movieImage);
     }
 
@@ -75,6 +77,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     public void updateMovies(List<Movies> items) {
         mItems = items;
+        this.mItems.addAll(mItems);
         notifyDataSetChanged();
     }
 
