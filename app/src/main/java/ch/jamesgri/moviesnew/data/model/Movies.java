@@ -4,57 +4,68 @@ package ch.jamesgri.moviesnew.data.model;
  * Created by jamesrichardson on 21/03/2018.
  */
 
+import android.os.Parcelable;
+
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Movies {
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
+@Parcel
+public class Movies implements Parcelable {
+
+    // Blank constructor as required for Parcelable
+    public Movies() {
+    }
 
     // Variable names for the different fields from the JSON
 
     @SerializedName("vote_count")
     @Expose
-    private Integer voteCount;
+    public Integer voteCount;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
     @SerializedName("video")
     @Expose
-    private Boolean video;
+    public Boolean video;
     @SerializedName("vote_average")
     @Expose
-    private Double voteAverage;
+    public Double voteAverage;
     @SerializedName("title")
     @Expose
-    private String title;
+    public String title;
     @SerializedName("popularity")
     @Expose
-    private Double popularity;
+    public Double popularity;
     @SerializedName("poster_path")
     @Expose
-    private String posterPath;
+    public String posterPath;
     @SerializedName("original_language")
     @Expose
-    private String originalLanguage;
+    public String originalLanguage;
     @SerializedName("original_title")
     @Expose
-    private String originalTitle;
+    public String originalTitle;
     @SerializedName("genre_ids")
     @Expose
-    private List<Integer> genreIds = null;
+    public List<Integer> genreIds = null;
     @SerializedName("backdrop_path")
     @Expose
-    private String backdropPath;
+    public String backdropPath;
     @SerializedName("adult")
     @Expose
-    private Boolean adult;
+    public Boolean adult;
     @SerializedName("overview")
     @Expose
-    private String overview;
+    public String overview;
     @SerializedName("release_date")
     @Expose
-    private String releaseDate;
+    public String releaseDate;
+
     // Constructor
 
     public Movies(Integer voteCount, Integer id, Boolean video, Double voteAverage, String title, Double popularity, String posterPath, String originalLanguage, String originalTitle, List<Integer> genreIds, String backdropPath, Boolean adult, String overview, String releaseDate) {
@@ -75,6 +86,52 @@ public class Movies {
     }
 
     // Getters and setters
+
+    protected Movies(android.os.Parcel in) {
+        if (in.readByte() == 0) {
+            voteCount = null;
+        } else {
+            voteCount = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        byte tmpVideo = in.readByte();
+        video = tmpVideo == 0 ? null : tmpVideo == 1;
+        if (in.readByte() == 0) {
+            voteAverage = null;
+        } else {
+            voteAverage = in.readDouble();
+        }
+        title = in.readString();
+        if (in.readByte() == 0) {
+            popularity = null;
+        } else {
+            popularity = in.readDouble();
+        }
+        posterPath = in.readString();
+        originalLanguage = in.readString();
+        originalTitle = in.readString();
+        backdropPath = in.readString();
+        byte tmpAdult = in.readByte();
+        adult = tmpAdult == 0 ? null : tmpAdult == 1;
+        overview = in.readString();
+        releaseDate = in.readString();
+    }
+
+    public static final Creator<Movies> CREATOR = new Creator<Movies>() {
+        @Override
+        public Movies createFromParcel(android.os.Parcel in) {
+            return new Movies(in);
+        }
+
+        @Override
+        public Movies[] newArray(int size) {
+            return new Movies[size];
+        }
+    };
 
     public Integer getVoteCount() {
         return voteCount;
@@ -125,7 +182,7 @@ public class Movies {
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return String.format("https://image.tmdb.org/t/p/w185%s",posterPath);
     }
 
     public void setPosterPath(String posterPath) {
@@ -157,7 +214,7 @@ public class Movies {
     }
 
     public String getBackdropPath() {
-        return backdropPath;
+        return String.format("https://image.tmdb.org/t/p/w780%s",backdropPath);
     }
 
     public void setBackdropPath(String backdropPath) {
@@ -188,4 +245,45 @@ public class Movies {
         this.releaseDate = releaseDate;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(android.os.Parcel parcel, int i) {
+        if (voteCount == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(voteCount);
+        }
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
+        }
+        parcel.writeByte((byte) (video == null ? 0 : video ? 1 : 2));
+        if (voteAverage == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(voteAverage);
+        }
+        parcel.writeString(title);
+        if (popularity == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(popularity);
+        }
+        parcel.writeString(posterPath);
+        parcel.writeString(originalLanguage);
+        parcel.writeString(originalTitle);
+        parcel.writeString(backdropPath);
+        parcel.writeByte((byte) (adult == null ? 0 : adult ? 1 : 2));
+        parcel.writeString(overview);
+        parcel.writeString(releaseDate);
+    }
 }

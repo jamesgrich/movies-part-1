@@ -6,13 +6,13 @@
     tools:context=".activity.MainActivity">
 
     <item
-        android:id="@+id/action_most_popular"
-        android:title="@string/toolbar_most_popular"
+        android:id="@+id/action_popular"
+        android:title="@string/toolbar_popular"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_highest_rated"
-        android:title="@string/toolbar_highest_rated"
+        android:title="@string/toolbar_rated"
         app:showAsAction="never"/>
 
 </menu>

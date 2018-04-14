@@ -6,10 +6,17 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.jamesgri.moviesnew.data.model.Movies;
 import ch.jamesgri.moviesnew.data.model.MoviesResponse;
@@ -20,16 +27,41 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Path;
 
+import static ch.jamesgri.moviesnew.data.remote.ApiUtils.BASE_URL;
+
 public class MainActivity extends AppCompatActivity {
 
     private MoviesAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private MovieService mService;
+    public static List<Movies> mListofMovies;
+
+    // Code for the menu
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_popular:
+            getMovies("popular");
+                return true;
+            default:
+            case R.id.action_highest_rated:
+            getMovies("top_rated");
+                return true;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mService = ApiUtils.getMovieService();
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -46,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(itemDecoration);
 
-        getMovies("top_rated");
+        getMovies("popular");
     }
 
     public void getMovies(final String preference) {
@@ -56,8 +88,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if (response.isSuccessful()) {
-                    mAdapter.updateMovies(response.body().getResults());
-                    Log.d("MainActivity", "posts loaded from API");
+                    mListofMovies = response.body().getResults();
+                    Log.d("MainActivity", "Number of movies received: " + mListofMovies.size());
+                    mAdapter.updateMovies(mListofMovies);
+                    mAdapter.notifyDataSetChanged();
                 } else {
                     int statusCode = response.code();
                     // handle request errors depending on status code

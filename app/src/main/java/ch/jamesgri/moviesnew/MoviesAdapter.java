@@ -14,6 +14,7 @@ import java.util.List;
 import ch.jamesgri.moviesnew.data.model.Movies;
 
 import static ch.jamesgri.moviesnew.data.remote.ApiUtils.BASE_URL;
+import static ch.jamesgri.moviesnew.data.remote.ApiUtils.SIZE;
 
 /**
  * Created by jamesrichardson on 21/03/2018.
@@ -56,6 +57,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View postView = inflater.inflate(R.layout.movies_list_item, parent, false);
+        postView.setFocusable(true);
 
         ViewHolder viewHolder = new ViewHolder(postView);
         return viewHolder;
@@ -66,7 +68,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         Movies item = mItems.get(position);
 
         Picasso.with(mContext)
-                .load(BASE_URL + item.getPosterPath())
+                .load(item.getPosterPath())
                 .into(holder.movieImage);
     }
 
