@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("MainActivity", "Number of movies received: " + mListofMovies.size());
                     mAdapter.updateMovies(mListofMovies);
                     mAdapter.notifyDataSetChanged();
+
                 } else {
                     int statusCode = response.code();
                     // handle request errors depending on status code
