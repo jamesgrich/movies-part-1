@@ -39,7 +39,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         @Override
         public void onClick(View view) {
             int clickedPosition = getAdapterPosition();
-            mItemListener.onPostClick(clickedPosition);
+            mItemListener.onPostClick(getItem(clickedPosition));
         }
     }
 
@@ -87,6 +87,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
     public interface PostItemListener {
-        void onPostClick(long id);
+        void onPostClick(Movies movies);
     }
 }

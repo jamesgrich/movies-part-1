@@ -33,7 +33,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent i = getIntent();
-        Movies moviesObject = (Movies) Parcels.unwrap(getIntent().getParcelableExtra("movies"));
+        Movies moviesObject = (Movies) Parcels.unwrap(i.getParcelableExtra("parcel_data"));
         mImageHeader = findViewById(R.id.movies_header);
         mMoviesArtwork = findViewById(R.id.movies_artwork);
         mMovieTitle = findViewById(R.id.movies_title);
@@ -41,20 +41,21 @@ public class DetailActivity extends AppCompatActivity {
         mMovieVoteAverage = findViewById(R.id.movies_vote_average);
         mMoviePlotSynopsis = findViewById(R.id.movies_plot_synopsis);
 
-    public void displayDetailMovies(moviesObject) {
-        Movies mMovie = MainActivity.mListofMovies;
+    }
 
-        mMovieTitle.setText(mMovie.getOriginalTitle());
-        mMovieReleaseDate.setText(mMovie.getReleaseDate());
-        mMovieVoteAverage.setText(String.valueOf(mMovie.getVoteAverage()));
-        mMoviePlotSynopsis.setText(mMovie.getOverview());
+    public void displayDetailMovies(Movies moviesObject) {
+
+        mMovieTitle.setText(moviesObject.getOriginalTitle());
+        mMovieReleaseDate.setText(moviesObject.getReleaseDate());
+        mMovieVoteAverage.setText(String.valueOf(moviesObject.getVoteAverage()));
+        mMoviePlotSynopsis.setText(moviesObject.getOverview());
 
         Picasso.with(this)
-                .load(mMovie.getBackdropPath())
+                .load(moviesObject.getBackdropPath())
                 .into(mImageHeader);
 
         Picasso.with(this)
-                .load(mMovie.getPosterPath())
+                .load(moviesObject.getPosterPath())
                 .into(mMoviesArtwork);
     }
 }

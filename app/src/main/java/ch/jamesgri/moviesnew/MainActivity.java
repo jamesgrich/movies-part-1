@@ -2,6 +2,7 @@ package ch.jamesgri.moviesnew;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Movie;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -84,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MoviesAdapter(this, new ArrayList<Movies>(0), new MoviesAdapter.PostItemListener() {
 
             @Override
-            public void onPostClick(long id) {
-                Movies movies = new Movies();
+            public void onPostClick(Movies movies) {
+                Movies movies = new Movies(MoviesAdapter movies);
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("parcel_data", Parcels.wrap(movies));
+                intent.putExtra("parcel_data", movies);
                 startActivity(intent);
             }
         });
