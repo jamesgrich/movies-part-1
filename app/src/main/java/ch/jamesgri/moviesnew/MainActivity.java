@@ -1,5 +1,9 @@
 package ch.jamesgri.moviesnew;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,10 +19,13 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import ch.jamesgri.moviesnew.data.model.Movies;
+import ch.jamesgri.moviesnew.data.model.Movies$$Parcelable;
 import ch.jamesgri.moviesnew.data.model.MoviesResponse;
 import ch.jamesgri.moviesnew.data.remote.ApiUtils;
 import ch.jamesgri.moviesnew.data.remote.MovieService;
@@ -49,12 +56,21 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_popular:
             getMovies("popular");
+            Toast.makeText(getApplicationContext(), "Movie source changed to Most Popular", Toast.LENGTH_SHORT).show();
                 return true;
             default:
             case R.id.action_highest_rated:
             getMovies("top_rated");
+                Toast.makeText(getApplicationContext(), "Movie source changed to Top Rated", Toast.LENGTH_SHORT).show();
                 return true;
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     @Override
@@ -69,7 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPostClick(long id) {
-                Toast.makeText(MainActivity.this, "Post id is" + id, Toast.LENGTH_SHORT).show();
+                Movies movies = new Movies();
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("parcel_data", Parcels.wrap(movies));
+                startActivity(intent);
             }
         });
 
