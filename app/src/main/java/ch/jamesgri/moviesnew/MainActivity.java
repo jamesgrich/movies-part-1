@@ -24,6 +24,7 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TooManyListenersException;
 
 import ch.jamesgri.moviesnew.data.model.Movies;
 import ch.jamesgri.moviesnew.data.model.Movies$$Parcelable;
@@ -80,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         mService = ApiUtils.getMovieService();
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -87,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPostClick(Movies movies) {
-                Movies getMovies = mListofMovies(getMovies(movies);
+
+                // I know this needs fixing below but couldn't understand what to put here instead
+//                Movies getMovies = mListofMovies(getMovies(movies));
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("parcel_data", movies);
                 startActivity(intent);
