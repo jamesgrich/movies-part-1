@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private MoviesAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private MovieService mService;
+
     public static List<Movies> mListofMovies;
 
     // Code for the menu
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPostClick(Movies movies) {
-                Movies movies = new Movies(MoviesAdapter movies);
+                Movies getMovies = mListofMovies(getMovies(movies);
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("parcel_data", movies);
                 startActivity(intent);
