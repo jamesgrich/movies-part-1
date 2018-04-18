@@ -11,7 +11,6 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 
 import ch.jamesgri.moviesnew.data.model.Movies;
-import ch.jamesgri.moviesnew.data.model.Movies$$Parcelable;
 
 /**
  * Created by jamesrichardson on 15/04/2018.

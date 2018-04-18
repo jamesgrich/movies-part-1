@@ -96,10 +96,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPostClick(Movies movies) {
 
-                // I know this needs fixing below but couldn't understand what to put here instead
-//                Movies getMovies = mListofMovies(getMovies(movies));
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("parcel_data", movies);
+
+                intent.putExtra("parcel_data", Parcels.wrap(movies));
                 startActivity(intent);
             }
         });
