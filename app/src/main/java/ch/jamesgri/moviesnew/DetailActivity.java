@@ -32,15 +32,15 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent i = getIntent();
-        moviesObject = Parcels.unwrap(i.getParcelableExtra("parcel_data"));
         displayDetailMovies(moviesObject);
+        moviesObject = Parcels.unwrap(i.getParcelableExtra("parcel_data"));
+
         mImageHeader = findViewById(R.id.movies_header);
         mMoviesArtwork = findViewById(R.id.movies_artwork);
-//        mMovieTitle = findViewById(R.id.movies_title);
+        mMovieTitle = findViewById(R.id.movies_title);
         mMovieReleaseDate = findViewById(R.id.movies_release_date);
         mMovieVoteAverage = findViewById(R.id.movies_vote_average);
         mMoviePlotSynopsis = findViewById(R.id.movies_plot_synopsis);
-
     }
 
     public void displayDetailMovies(Movies moviesObject) {

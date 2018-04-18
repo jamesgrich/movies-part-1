@@ -6,6 +6,7 @@ import android.graphics.Movie;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPostClick(Movies movies) {
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("parcel_data",  movies);
+                intent.putExtra("parcel_data", movies);
                 startActivity(intent);
             }
         });
