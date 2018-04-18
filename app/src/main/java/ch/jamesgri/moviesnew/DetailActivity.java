@@ -32,7 +32,8 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent i = getIntent();
-        Movies moviesObject = (Movies) Parcels.unwrap(i.getParcelableExtra("parcel_data"));
+        moviesObject = Parcels.unwrap(i.getParcelableExtra("parcel_data"));
+        displayDetailMovies(moviesObject);
         mImageHeader = findViewById(R.id.movies_header);
         mMoviesArtwork = findViewById(R.id.movies_artwork);
 //        mMovieTitle = findViewById(R.id.movies_title);

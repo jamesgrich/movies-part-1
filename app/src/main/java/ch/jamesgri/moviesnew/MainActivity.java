@@ -97,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPostClick(Movies movies) {
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-
-                intent.putExtra("parcel_data", Parcels.wrap(movies));
+                intent.putExtra("parcel_data",  movies);
                 startActivity(intent);
             }
         });
