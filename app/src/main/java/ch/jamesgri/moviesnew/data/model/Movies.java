@@ -96,6 +96,7 @@ public class Movies implements Parcelable {
         adult = tmpAdult == 0 ? null : tmpAdult == 1;
         overview = in.readString();
         releaseDate = in.readString();
+        voteAverage = in.readDouble();
     }
 
     public static final Creator<Movies> CREATOR = new Creator<Movies>() {
@@ -159,7 +160,7 @@ public class Movies implements Parcelable {
     }
 
     public String getPosterPath() {
-        return String.format("https://image.tmdb.org/t/p/w185%s",posterPath);
+        return String.format("https://image.tmdb.org/t/p/w185%s", posterPath);
     }
 
     public void setPosterPath(String posterPath) {
@@ -191,7 +192,7 @@ public class Movies implements Parcelable {
     }
 
     public String getBackdropPath() {
-        return String.format("https://image.tmdb.org/t/p/w780%s",backdropPath);
+        return String.format("https://image.tmdb.org/t/p/w780%s", backdropPath);
     }
 
     public void setBackdropPath(String backdropPath) {
@@ -237,5 +238,6 @@ public class Movies implements Parcelable {
         parcel.writeByte((byte) (adult == null ? 0 : adult ? 1 : 2));
         parcel.writeString(overview);
         parcel.writeString(releaseDate);
+        parcel.writeDouble(voteAverage);
     }
 }

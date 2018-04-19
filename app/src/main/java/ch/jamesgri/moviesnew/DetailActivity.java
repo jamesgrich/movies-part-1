@@ -34,19 +34,19 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        if (i != null) {
-            if (i.hasExtra("parcel_data")) {
-                moviesObject = i.getParcelableExtra("parcel_data");
-                displayDetailMovies(moviesObject);
-            }
-        }
-
         mImageHeader = findViewById(R.id.movies_header);
         mMoviesArtwork = findViewById(R.id.movies_artwork);
         mMovieTitle = findViewById(R.id.movies_title);
         mMovieReleaseDate = findViewById(R.id.movies_release_date);
         mMovieVoteAverage = findViewById(R.id.movies_vote_average);
         mMoviePlotSynopsis = findViewById(R.id.movies_plot_synopsis);
+
+        if (i != null) {
+            if (i.hasExtra("parcel_data")) {
+                moviesObject = i.getParcelableExtra("parcel_data");
+                displayDetailMovies(moviesObject);
+            }
+        }
     }
 
     public void displayDetailMovies(Movies moviesObject) {

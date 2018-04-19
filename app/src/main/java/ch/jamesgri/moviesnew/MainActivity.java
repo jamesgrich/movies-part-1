@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -59,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_popular:
-            getMovies("popular");
-            Toast.makeText(getApplicationContext(), "Movie source changed to Most Popular", Toast.LENGTH_SHORT).show();
+                getMovies("popular");
+                Toast.makeText(getApplicationContext(), "Movie source changed to Most Popular", Toast.LENGTH_SHORT).show();
                 return true;
             default:
             case R.id.action_highest_rated:
-            getMovies("top_rated");
+                getMovies("top_rated");
                 Toast.makeText(getApplicationContext(), "Movie source changed to Top Rated", Toast.LENGTH_SHORT).show();
                 return true;
         }
@@ -82,13 +82,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
         mService = ApiUtils.getMovieService();
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -98,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPostClick(Movies movies) {
                 mMovies = movies;
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("parcel_data",  movies);
+                intent.putExtra("parcel_data", movies);
                 startActivity(intent);
             }
         });
