@@ -88,29 +88,6 @@ public class Movies implements Parcelable {
     // Getters and setters
 
     protected Movies(android.os.Parcel in) {
-        if (in.readByte() == 0) {
-            voteCount = null;
-        } else {
-            voteCount = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readInt();
-        }
-        byte tmpVideo = in.readByte();
-        video = tmpVideo == 0 ? null : tmpVideo == 1;
-        if (in.readByte() == 0) {
-            voteAverage = null;
-        } else {
-            voteAverage = in.readDouble();
-        }
-        title = in.readString();
-        if (in.readByte() == 0) {
-            popularity = null;
-        } else {
-            popularity = in.readDouble();
-        }
         posterPath = in.readString();
         originalLanguage = in.readString();
         originalTitle = in.readString();
@@ -252,32 +229,7 @@ public class Movies implements Parcelable {
 
     @Override
     public void writeToParcel(android.os.Parcel parcel, int i) {
-        if (voteCount == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(voteCount);
-        }
-        if (id == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(id);
-        }
-        parcel.writeByte((byte) (video == null ? 0 : video ? 1 : 2));
-        if (voteAverage == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeDouble(voteAverage);
-        }
-        parcel.writeString(title);
-        if (popularity == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeDouble(popularity);
-        }
+
         parcel.writeString(posterPath);
         parcel.writeString(originalLanguage);
         parcel.writeString(originalTitle);

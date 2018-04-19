@@ -3,6 +3,7 @@ package ch.jamesgri.moviesnew;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,8 +33,13 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent i = getIntent();
-        displayDetailMovies(moviesObject);
-        moviesObject = Parcels.unwrap(i.getParcelableExtra("parcel_data"));
+
+        if (i != null) {
+            if (i.hasExtra("parcel_data")) {
+                moviesObject = i.getParcelableExtra("parcel_data");
+                displayDetailMovies(moviesObject);
+            }
+        }
 
         mImageHeader = findViewById(R.id.movies_header);
         mMoviesArtwork = findViewById(R.id.movies_artwork);

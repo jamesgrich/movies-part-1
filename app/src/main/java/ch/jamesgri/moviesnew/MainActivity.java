@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.TooManyListenersException;
 
 import ch.jamesgri.moviesnew.data.model.Movies;
-import ch.jamesgri.moviesnew.data.model.Movies$$Parcelable;
 import ch.jamesgri.moviesnew.data.model.MoviesResponse;
 import ch.jamesgri.moviesnew.data.remote.ApiUtils;
 import ch.jamesgri.moviesnew.data.remote.MovieService;
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private MoviesAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private MovieService mService;
+    private Movies mMovies;
 
     public static List<Movies> mListofMovies;
 
@@ -96,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPostClick(Movies movies) {
-
+                mMovies = movies;
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("parcel_data", movies);
+                intent.putExtra("parcel_data",  movies);
                 startActivity(intent);
             }
         });
