@@ -11,6 +11,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class MoviesResponse {
 
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("page")
     @Expose
     private Integer page;
@@ -23,6 +26,8 @@ public class MoviesResponse {
     @SerializedName("results")
     @Expose
     private List<Movies> results;
+
+    public Integer getId() { return id; }
 
     public Integer getPage() {
         return page;

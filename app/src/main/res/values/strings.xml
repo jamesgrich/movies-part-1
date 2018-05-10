@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Movies Part 1</string>
+    <string name="app_name">Movies</string>
     <string name="error_message">Cannot retrieve data</string>
     <string name="toolbar_popular">Most Popular</string>
     <string name="toolbar_rated">Top Rated</string>
+    <string name="toolbar_favourites">Favourites</string>
     <string name="release_date">Release Date:</string>
     <string name="vote_average">Vote Average:</string>
     <string name="plot_synopsis">Plot Synopsis:</string>

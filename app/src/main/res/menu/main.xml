@@ -15,4 +15,9 @@
         android:title="@string/toolbar_rated"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/action_favourites"
+        android:title="@string/toolbar_favourites"
+        app:showAsAction="never"/>
+
 </menu>

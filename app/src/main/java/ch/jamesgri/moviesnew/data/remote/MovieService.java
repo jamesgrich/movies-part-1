@@ -12,8 +12,19 @@ import retrofit2.http.Query;
 
 public interface MovieService {
 
-    // Calling the GET request for the two API end points
+    // Calling the GET request for the API end points
 
     @GET("movie/{sort_by}")
     Call<MoviesResponse> getMovies(@Path("sort_by") String sortBy, @Query("api_key") String apiKey);
+
+    // Calling the GET request for the Video endpoint
+
+    @GET("movie/{id}/video}")
+    Call<MoviesVideo> getVideos(@Path("id") String sortBy, @Query("api_key") String apiKey);
+
+    // Calling the GET request for the review endpoints
+
+    @GET("movie/{id}/review")
+    Call<MoviesReview> getReviews(@Path("id") String sortBy, @Query("api_key") String apiKey);
+
 }
