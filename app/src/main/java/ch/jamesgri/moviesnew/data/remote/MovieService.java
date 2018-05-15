@@ -5,6 +5,8 @@ package ch.jamesgri.moviesnew.data.remote;
  */
 
 import ch.jamesgri.moviesnew.data.model.MoviesResponse;
+import ch.jamesgri.moviesnew.data.model.MovieVideo;
+import ch.jamesgri.moviesnew.data.model.MovieReview;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -20,11 +22,11 @@ public interface MovieService {
     // Calling the GET request for the Video endpoint
 
     @GET("movie/{id}/video}")
-    Call<MoviesVideo> getVideos(@Path("id") String sortBy, @Query("api_key") String apiKey);
+    Call<MoviesVideo> getVideos(@Path("id") String sortBy);
 
     // Calling the GET request for the review endpoints
 
     @GET("movie/{id}/review")
-    Call<MoviesReview> getReviews(@Path("id") String sortBy, @Query("api_key") String apiKey);
+    Call<MoviesReview> getReviews(@Path("id") String sortBy);
 
 }

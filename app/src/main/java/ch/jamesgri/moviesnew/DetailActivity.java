@@ -12,6 +12,14 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 
 import ch.jamesgri.moviesnew.data.model.Movies;
+import ch.jamesgri.moviesnew.data.model.MoviesResponse;
+import ch.jamesgri.moviesnew.data.remote.ApiUtils;
+import ch.jamesgri.moviesnew.data.remote.MovieService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static ch.jamesgri.moviesnew.MainActivity.mListofMovies;
 
 /**
  * Created by jamesrichardson on 15/04/2018.
@@ -25,6 +33,10 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mMovieReleaseDate;
     private TextView mMovieVoteAverage;
     private TextView mMoviePlotSynopsis;
+    private MoviesAdapter mAdapter;
+    private MovieService mService;
+
+
     private static Movies moviesObject;
 
     @Override
@@ -47,6 +59,60 @@ public class DetailActivity extends AppCompatActivity {
                 displayDetailMovies(moviesObject);
             }
         }
+
+        getReviews();
+        getVideos();
+
+    }
+
+    public void getReviews() {
+
+        mService.getReviews(ApiUtils.API_KEY).enqueue(new Callback<MoviesResponse>() {
+
+            @Override
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                if (response.isSuccessful()) {
+                    mListofMovies = response.body().getResults();
+                    Log.d("MainActivity", "Number of movies received: " + mListofMovies.size());
+                    mAdapter.updateMovies(mListofMovies);
+                    mAdapter.notifyDataSetChanged();
+
+                } else {
+                    int statusCode = response.code();
+                    // handle request errors depending on status code
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+                Log.d("MainActivity", "error loading from API");
+            }
+        });
+    }
+
+    public void getVideos() {
+
+        mService.getVideos(ApiUtils.API_KEY).enqueue(new Callback<MoviesResponse>() {
+
+            @Override
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                if (response.isSuccessful()) {
+                    mListofMovies = response.body().getResults();
+                    Log.d("MainActivity", "Number of movies received: " + mListofMovies.size());
+                    mAdapter.updateMovies(mListofMovies);
+                    mAdapter.notifyDataSetChanged();
+
+                } else {
+                    int statusCode = response.code();
+                    // handle request errors depending on status code
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+                Log.d("MainActivity", "error loading from API");
+            }
+        });
     }
 
     public void displayDetailMovies(Movies moviesObject) {
