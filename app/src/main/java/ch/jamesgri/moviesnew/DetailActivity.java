@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import ch.jamesgri.moviesnew.data.model.MovieReview;
+import ch.jamesgri.moviesnew.data.model.MovieVideo;
 import ch.jamesgri.moviesnew.data.model.Movies;
 import ch.jamesgri.moviesnew.data.model.MoviesResponse;
 import ch.jamesgri.moviesnew.data.remote.ApiUtils;
@@ -67,13 +69,13 @@ public class DetailActivity extends AppCompatActivity {
 
     public void getReviews() {
 
-        mService.getReviews(ApiUtils.API_KEY).enqueue(new Callback<MoviesResponse>() {
+        mService.getReviews(ApiUtils.API_KEY).enqueue(new Callback<MovieReview>() {
 
             @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+            public void onResponse(Call<MovieReview> call, Response<MovieReview> response) {
                 if (response.isSuccessful()) {
                     mListofMovies = response.body().getResults();
-                    Log.d("MainActivity", "Number of movies received: " + mListofMovies.size());
+                    Log.d("DetailActivity", "Number of movies received: " + mListofMovies.size());
                     mAdapter.updateMovies(mListofMovies);
                     mAdapter.notifyDataSetChanged();
 
@@ -84,21 +86,21 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Log.d("MainActivity", "error loading from API");
+            public void onFailure(Call<MovieReview> call, Throwable t) {
+                Log.d("DetailActivity", "error loading reviews from API");
             }
         });
     }
 
     public void getVideos() {
 
-        mService.getVideos(ApiUtils.API_KEY).enqueue(new Callback<MoviesResponse>() {
+        mService.getVideos(ApiUtils.API_KEY).enqueue(new Callback<MovieVideo>() {
 
             @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+            public void onResponse(Call<MovieVideo> call, Response<MovieVideo> response) {
                 if (response.isSuccessful()) {
                     mListofMovies = response.body().getResults();
-                    Log.d("MainActivity", "Number of movies received: " + mListofMovies.size());
+                    Log.d("DetailActivity", "Number of movies received: " + mListofMovies.size());
                     mAdapter.updateMovies(mListofMovies);
                     mAdapter.notifyDataSetChanged();
 
@@ -109,8 +111,8 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Log.d("MainActivity", "error loading from API");
+            public void onFailure(Call<MovieVideo> call, Throwable t) {
+                Log.d("DetailActivity", "error loading videos from API");
             }
         });
     }
