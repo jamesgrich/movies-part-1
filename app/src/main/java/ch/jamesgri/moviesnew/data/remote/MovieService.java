@@ -27,6 +27,6 @@ public interface MovieService {
     // Calling the GET request for the review endpoints
 
     @GET("movie/{id}/review")
-    Call<MovieReview> getReviews(@Path("id") @Query("api_key") String apiKey);
+    Call<MovieReview> getReviews(@Path("id") String movieId, @Query("api_key") String apiKey);
 
 }

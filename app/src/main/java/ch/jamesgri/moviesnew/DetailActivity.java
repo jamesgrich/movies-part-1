@@ -37,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mMoviePlotSynopsis;
     private MoviesAdapter mAdapter;
     private MovieService mService;
+    private String movieId;
 
 
     private static Movies moviesObject;
@@ -69,7 +70,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public void getReviews() {
 
-        mService.getReviews(ApiUtils.API_KEY).enqueue(new Callback<MovieReview>() {
+        mService.getReviews(movieId, ApiUtils.API_KEY).enqueue(new Callback<MovieReview>() {
 
             @Override
             public void onResponse(Call<MovieReview> call, Response<MovieReview> response) {
