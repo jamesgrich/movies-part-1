@@ -22,7 +22,7 @@ public interface MovieService {
     // Calling the GET request for the video endpoint
 
     @GET("movie/{id}/video}")
-    Call<MovieVideo> getVideos(@Path("id") @Query("api_key") String apiKey);
+    Call<MovieVideo> getVideos(@Path("id") String movieId, @Query("api_key") String apiKey);
 
     // Calling the GET request for the review endpoints
 

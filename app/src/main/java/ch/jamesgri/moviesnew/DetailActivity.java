@@ -63,14 +63,14 @@ public class DetailActivity extends AppCompatActivity {
             }
         }
 
-        getReviews();
-        getVideos();
+        getReviews(movieId);
+        getVideos(movieId);
 
     }
 
-    public void getReviews() {
+    public void getReviews(String idOfMovie) {
 
-        mService.getReviews(movieId, ApiUtils.API_KEY).enqueue(new Callback<MovieReview>() {
+        mService.getReviews(idOfMovie, ApiUtils.API_KEY).enqueue(new Callback<MovieReview>() {
 
             @Override
             public void onResponse(Call<MovieReview> call, Response<MovieReview> response) {
@@ -93,9 +93,9 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-    public void getVideos() {
+    public void getVideos(String idOfMovie) {
 
-        mService.getVideos(ApiUtils.API_KEY).enqueue(new Callback<MovieVideo>() {
+        mService.getVideos(idOfMovie, ApiUtils.API_KEY).enqueue(new Callback<MovieVideo>() {
 
             @Override
             public void onResponse(Call<MovieVideo> call, Response<MovieVideo> response) {
