@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private MovieService mService;
     private Movies mMovies;
 
-    public static List<Movies> mListofMovies;
+    public static ArrayList<Movies> mListofMovies;
 
     // Code for the menu
 
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mService = ApiUtils.getMovieService();
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        mAdapter = new MoviesAdapter(this, new ArrayList<Movies>(0), new MoviesAdapter.PostItemListener() {
+        mAdapter = new MoviesAdapter(this, new mListOfMovies(0), new MoviesAdapter.PostItemListener() {
 
             @Override
             public void onPostClick(Movies movies) {

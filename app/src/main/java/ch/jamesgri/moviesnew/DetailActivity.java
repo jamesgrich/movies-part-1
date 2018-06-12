@@ -38,6 +38,7 @@ public class DetailActivity extends AppCompatActivity {
     private MoviesAdapter mAdapter;
     private MovieService mService;
     private String movieId;
+    private String movieTrailerTitle;
 
 
     private static Movies moviesObject;
@@ -49,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent i = getIntent();
 
+        mService = ApiUtils.getMovieService();
         mImageHeader = findViewById(R.id.movies_header);
         mMoviesArtwork = findViewById(R.id.movies_artwork);
         mMovieTitle = findViewById(R.id.movies_title);
@@ -100,9 +102,10 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MovieVideo> call, Response<MovieVideo> response) {
                 if (response.isSuccessful()) {
-                    mListofMovies = response.body().getResults();
-                    Log.d("DetailActivity", "Number of movies received: " + mListofMovies.size());
-                    mAdapter.updateMovies(mListofMovies);
+                    VideoTextView.setText(movieTrailer1.getTitle());
+//                    mListofMovies = response.body().getResults();
+//                    Log.d("DetailActivity", "Number of movies received: " + mListofMovies.size());
+//                    mAdapter.updateMovies(mListofMovies);
                     mAdapter.notifyDataSetChanged();
 
                 } else {

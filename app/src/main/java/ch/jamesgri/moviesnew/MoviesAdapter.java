@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import ch.jamesgri.moviesnew.data.model.MovieReview;
+import ch.jamesgri.moviesnew.data.model.MovieVideo;
 import ch.jamesgri.moviesnew.data.model.Movies;
 
 import static ch.jamesgri.moviesnew.data.remote.ApiUtils.BASE_URL;
@@ -23,6 +25,8 @@ import static ch.jamesgri.moviesnew.data.remote.ApiUtils.SIZE;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     private List<Movies> mItems;
+    private List<MovieVideo> mVideos;
+    private List <MovieReview> mReviews;
     private Context mContext;
     private PostItemListener mItemListener;
 
@@ -43,8 +47,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         }
     }
 
-    public MoviesAdapter(Context context, List<Movies> posts, PostItemListener itemListener) {
+    public MoviesAdapter(Context context, List<Movies> posts, List<MovieReview> reviews, PostItemListener itemListener) {
         mItems = posts;
+        mReviews = reviews;
         mContext = context;
         mItemListener = itemListener;
     }
@@ -65,6 +70,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Movies item = mItems.get(position);
+        MovieReview review = mReviews.get(position);
 
         Picasso.with(mContext)
                 .load(item.getPosterPath())
@@ -76,8 +82,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void updateMovies(List<Movies> items) {
+    public void updateMovies(List<Movies> items, List<MovieReview> reviews) {
         mItems = items;
+        mReviews = reviews;
         notifyDataSetChanged();
     }
 
